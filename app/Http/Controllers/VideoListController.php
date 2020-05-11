@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use App\VideoList;
 use Illuminate\Http\Request;
+use File;
+use Session;
+use Illuminate\Support\Facades\Auth;
+use function Sodium\compare;
 
 class VideoListController extends Controller
 {
@@ -19,7 +24,21 @@ class VideoListController extends Controller
 
     public function index()
     {
-        //
+        $user = Auth::user();
+        $total_uploads = VideoList::select('id')->count();
+        $total_downloads = VideoList::select('downloaded_number')->sum('downloaded_number');
+        $total_users = User::select('id')->count();
+        $video_lists = VideoList::paginate(5);
+//        only user data
+        $user_downloads = VideoList::where('user_id', $user->id)->count();
+        $user_videos = VideoList::where('user_id', $user->id)->get();
+//        dd($user_downloads);
+        if ($user->is_user()){
+            return view('admin.downloaded', compact('user_downloads', 'user_videos'));
+        }
+        else {
+            return view('admin.dashboard',compact('total_uploads','total_downloads', 'total_users', 'video_lists'));
+        }
     }
     public function showAddboard(){
         return view('admin.add');
@@ -42,6 +61,21 @@ class VideoListController extends Controller
         VideoList::create($form_data);
         return back();
     }
-
+    public function editShow(){
+        $video_data = VideoList::paginate(5);
+        return view('admin.edit', compact('video_data'));
+    }
+    Public function editDelete($id){
+        $video = VideoList::where('id',$id)->get();
+        $video_path = public_path().'/uploaded_video/'.$video[0]->video_url;
+        $video_cover = public_path().'/cover_images/'.$video[0]->video_cover;
+        if (File::exists($video_path)) {
+            unlink($video_path);
+            unlink($video_cover);
+        }
+        VideoList::whereId($id)->delete();
+        Session::flash('message','Successful Deleted!');
+        return back();
+    }
 
 }

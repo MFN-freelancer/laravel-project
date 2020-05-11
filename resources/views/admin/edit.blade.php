@@ -10,6 +10,15 @@
                                 <h4 class="card-title mb-4">video edit/delete</h4>
                             </div>
                             <div class="table-responsive">
+                                @if(Session::has('message'))
+
+                                    <div class="alert alert-success alert-dismissible mb-2" role="alert">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                        <strong>{{Session::get('message')}}</strong>
+                                    </div>
+                                @endif
                                 <table class="table table-padded table-responsive-fix-big">
                                     <thead>
                                     <tr>
@@ -21,42 +30,43 @@
                                     </tr>
                                     </thead>
                                     <tbody>
+                                    @foreach($video_data as $video)
                                     <tr>
                                         <td>
                                             <div class="media">
-                                                <img src="../../assets/images/avatar/1.png" class="mr-3" width="60"
+                                                <img src="{{asset('/cover_images/'.$video->video_cover)}}" class="mr-3" width="60"
                                                      height="60" alt="">
                                                 <div class="media-body">
-                                                    <h5 class="m-0">Nylon-Spandex Leggings</h5>
-                                                    <span class="text-muted">Yoga Training</span>
+                                                    <h5 class="m-0">{{$video->video_title}}</h5>
+                                                    <span class="text-muted"></span>
                                                 </div>
                                             </div>
                                         </td>
                                         <td>
                                             <span class="review-stars" style="color: #ffc107;">
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star-o" aria-hidden="true"></i>
-                                                <i class="fa fa-star-o" aria-hidden="true"></i>
+                                                @for($i=0;$i<5;++$i)
+                                                <i class="fa fa-star{{ $video->ratings<=$i?'-o':'' }}" aria-hidden="true"></i>
+                                                @endfor
                                             </span>
                                         </td>
-                                        <td><span class="text-success">12</span>
+                                        <td><span class="text-success">{{$video->downloaded_number}}</span>
                                         </td>
-                                        <td>10/06/2018</td>
+                                        <td>{{$video->created_at}}</td>
                                         <td>
                                             <span>
-                                                <a href="javascript:void()" class="mr-4" data-toggle="tooltip"
-                                                  data-placement="top" title="" data-original-title="Edit">
-                                                    <i class="fa fa-pencil color-muted"></i> </a>
-                                                <a href="javascript:void()" data-toggle="tooltip" data-placement="top" title="" data-original-title="Close">
+                                                {{--<a href="javascript:void()" class="mr-4" data-toggle="tooltip"--}}
+                                                  {{--data-placement="top" title="" data-original-title="Edit">--}}
+                                                    {{--<i class="fa fa-pencil color-muted"></i> </a>--}}
+                                                <a href="/admin/edit-delete/{{$video->id}}" data-toggle="tooltip" data-placement="top" title="" data-original-title="Close">
                                                     <i class="fa fa-close color-danger"></i></a>
                                             </span>
                                         </td>
                                     </tr>
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>
+                            {{$video_data->links()}}
                         </div>
                     </div>
                 </div>

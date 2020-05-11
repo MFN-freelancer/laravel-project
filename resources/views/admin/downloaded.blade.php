@@ -7,7 +7,7 @@
                     <div class="card">
                         <div class="card-body widget-school-stat bg-1">
                             <div class="text">
-                                <h2>2584</h2>
+                                <h2>{{$user_downloads}}</h2>
                                 <p>Total downloaded video</p>
                             </div>
                             <div class="icon">
@@ -33,20 +33,22 @@
                                     </tr>
                                     </thead>
                                     <tbody>
+                                    @php($no=0)
+                                    @foreach($user_videos as $user_video)
+                                        @php($no++)
                                     <tr>
-                                        <td>1</td>
-                                        <td>forever remember</td>
+                                        <td>{{$no}}</td>
+                                        <td>{{$user_video->video_title}}</td>
                                         <td>
                                             <span class="review-stars" style="color: #ffc107;">
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star-o" aria-hidden="true"></i>
+                                                @for($i=0;$i<5;++$i)
+                                                    <i class="fa fa-star{{ $user_video->ratings<=$i?'-o':'' }}" aria-hidden="true"></i>
+                                                @endfor
                                             </span>
                                         </td>
-                                        <td>2020/5/09</td>
+                                        <td>{{$user_video->created_at}}</td>
                                     </tr>
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>

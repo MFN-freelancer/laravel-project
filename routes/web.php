@@ -15,45 +15,31 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+//Route::get('/', 'HomeController@index')->name('home');
 
-Route::get('/', function (){
-   return view('home');
-});
-Route::get('whats-new', function (){
-   return view('whats-new');
-});
-Route::get('whats-hot', function (){
-   return view('whats-hot');
-});
+Route::get('/', 'FrontController@index');
+Route::get('whats-new', 'FrontController@whatNew');
+Route::get('whats-hot', 'FrontController@whatHot');
+
 Route::get('contact-us', function (){
     return view('contact-us');
 });
 
 //admin part
 Route::group(['prefix'=>'admin'], function(){
-    Route::get('/', function (){
-        $user = Auth::user();
-        if ($user->is_user()){
-            return redirect('admin/downloaded');
-        }
-        else {
-            return view('admin.dashboard');
-        }
-    });
+    Route::get('/', 'VideoListController@index');
     Route::get('add-videos', 'VideoListController@showAddboard')->name('add-video');
     Route::post('add-videos', 'VideoListController@addVideo');
 
-    Route::get('edit-delete', function (){
-        return view('admin.edit');
-    })->name('edit-delete');
-    Route::get('manage-users', function (){
-        return view('admin.manage');
-    })->name('user-manage');
+    Route::get('edit-delete', 'VideoListController@editShow')->name('edit-delete');
+    Route::get('edit-delete/{id}', 'VideoListController@editDelete');
+
+    Route::get('manage-users', 'HomeController@manageUser')->name('user-manage');
+    Route::get('manage-users/{id}', 'HomeController@deleteUser');
+
     Route::get('change-password', function (){
         return view('admin.change');
     })->name('change-password');
-    Route::get('downloaded', function (){
-       return view('admin.downloaded');
-    })->name('downloaded-video');
+    Route::get('change-password/{id}', 'HomeController@updateUser');
+    Route::get('/downloaded', 'VideoListController@index')->name('downloaded-video');
 });

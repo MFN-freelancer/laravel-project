@@ -7,8 +7,18 @@
                     <div class="card forms-card">
                         <div class="card-body">
                             <h4 class="card-title mb-4">Update Credential</h4>
+                            @if(Session::has('message'))
+
+                                <div class="alert alert-success alert-dismissible mb-2" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                    <strong>{{Session::get('message')}}</strong>
+                                </div>
+                            @endif
                             <div class="basic-form">
-                                <form>
+                                <form method="get" action="/admin/change-password/{{Auth::user()->id}}">
+                                    @csrf
                                     <div class="form-group">
                                         <label for="validationDefaultUsername10" class="text-label">Username</label>
                                         <div class="input-group">
@@ -16,8 +26,8 @@
                                                 <span class="input-group-text" id="inputGroupPrepend2"> <i
                                                             class="fa fa-user" aria-hidden="true"></i> </span>
                                             </div>
-                                            <input type="text" class="form-control" id="validationDefaultUsername10"
-                                                   placeholder="Username" aria-describedby="inputGroupPrepend2"
+                                            <input type="text" class="form-control" name="name"
+                                                   placeholder="Username" value="{{Auth::user()->name}}"
                                                    required="">
                                         </div>
                                     </div>
@@ -30,7 +40,7 @@
                                                 </span>
                                             </div>
                                             <input type="email" class="form-control" placeholder="User Email"
-                                                   required="">
+                                                   value="{{Auth::user()->email}}" name="email" required="">
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -41,7 +51,7 @@
                                                             class="fa fa-lock" aria-hidden="true"></i> </span>
                                             </div>
                                             <input type="password" class="form-control" id="validationDefaultUsername11"
-                                                   placeholder="Password" aria-describedby="inputGroupPrepend3"
+                                                   placeholder="Password" name="password" aria-describedby="inputGroupPrepend3"
                                                    required="">
                                             <div class="input-group-append c-pointer">
                                                 <span class="input-group-text" id="inputGroupPrepend4"> <i

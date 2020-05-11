@@ -29,193 +29,45 @@
             <h2 class="main_title"><em></em>Latest Workout Videos<span>Fall in love with Fitness</span></h2>
             <div id="filter_buttons">
                 <button data-toggle="portfilter" class="active" data-target="all">All</button>
-                <button data-toggle="portfilter" data-target="Love">Love</button>
-                <button data-toggle="portfilter" data-target="Strength">Strength</button>
-                <button data-toggle="portfilter" data-target="Cardio">Cardio</button>
-                <button data-toggle="portfilter" data-target="Pilates">Pilates</button>
+                @foreach($cats as $cat)
+                <button data-toggle="portfilter" data-target="{{$cat->video_category}}">{{$cat->video_category}}</button>
+                @endforeach
             </div>
             <div class="row">
-                <div class="col-md-4" data-tag="Love">
+                @foreach($videos as $video)
+                <div class="col-md-4" data-tag="{{$video->video_category}}">
                     <div class="course_container">
-                        <div class="ribbon top"><span>Top Sell</span>
+                        <div class="ribbon top"><span>Latest Video</span>
                         </div>
                         <figure>
-                            <a href="fitness-course-1.html">
-                                <img src="{{asset("front_assets/img/course_1.jpg")}}" width="800" height="533"
+                            @auth
+                            <a href="{{URL::to('/uploaded_video/'.$video->video_url)}}" download>
+                            @endauth
+                                <img src="{{asset("cover_images/".$video->video_cover)}}" width="800" height="533"
                                      class="img-responsive" alt="Image">
-                                <div class="short_info"><i class="icon-clock-1"></i>2 hr 56 min</div>
+                                <div class="short_info"><i class="icon-clock-1"></i></div>
+                            @auth
                             </a>
+                            @endauth
                         </figure>
                         <div class="course_title">
-                            <div class="type"><span>Yoga</span>
+                            <div class="type"><span>{{$video->video_category}}</span>
                             </div>
-                            <h3><a href="fitness-course-1.html">Yoga Fundamentals</a></h3>
-                            <div class="info_2 clearfix"><span class="price">39.90<sup>$</sup></span><span
-                                        class="users">450</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End box course_container -->
-                </div>
-                <div class="col-md-4" data-tag="Love">
-                    <div class="course_container">
-                        <div class="ribbon top"><span>Top sell</span>
-                        </div>
-                        <figure>
-                            <a href="fitness-course-1.html">
-                                <img src="{{asset("front_assets/img/course_2.jpg")}}" width="800" height="533"
-                                     class="img-responsive" alt="Image">
-                                <div class="short_info"><i class="icon-clock-1"></i>2 hr 56 min</div>
-                            </a>
-                        </figure>
-                        <div class="course_title">
-                            <div class="type"><span>Yoga</span>
-                            </div>
-                            <h3><a href="fitness-course-1.html">Total Body Stretching </a></h3>
+                            @auth
+                            <h3><a href="{{URL::to('/uploaded_video/'.$video->video_url)}}" download>{{$video->video_title}} </a></h3>
+                            @endauth
                             <div class="info_2 clearfix">
                                 <span class="review-stars" style="color: #ffc107;">
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star-o" aria-hidden="true"></i>
-                                    <i class="fa fa-star-o" aria-hidden="true"></i>
+                                    @for($i=0;$i<5;++$i)
+                                        <i class="fa fa-star{{ $video->ratings<=$i?'-o':'' }}" aria-hidden="true"></i>
+                                    @endfor
                                 </span>
                             </div>
                         </div>
                     </div>
-                    <!-- End box course_container -->
                 </div>
-                <div class="col-md-4" data-tag="Love">
-                    <div class="course_container">
-                        <div class="ribbon"><span>Popular</span>
-                        </div>
-                        <figure>
-                            <a href="fitness-course-1.html">
-                                <img src="{{asset("front_assets/img/course_3.jpg")}}" width="800" height="533"
-                                     class="img-responsive" alt="Image">
-                                <div class="short_info"><i class="icon-clock-1"></i>2 hr 56 min</div>
-                            </a>
-                        </figure>
-                        <div class="course_title">
-                            <div class="type"><span>Yoga</span>
-                            </div>
-                            <h3><a href="fitness-course-1.html">Flexibility and Toning</a></h3>
-                            <div class="info_2 clearfix"><span class="price">39.90<sup>$</sup></span><span
-                                        class="users">450</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End box course_container -->
-                </div>
-                <div class="col-md-4" data-tag="Strength">
-                    <div class="course_container">
-                        <div class="ribbon"><span>Popular</span>
-                        </div>
-                        <figure>
-                            <a href="fitness-course-1.html">
-                                <img src="{{asset("front_assets/img/course_4.jpg")}}" width="800" height="533"
-                                     class="img-responsive" alt="Image">
-                                <div class="short_info"><i class="icon-clock-1"></i>2 hr 56 min</div>
-                            </a>
-                        </figure>
-                        <div class="course_title">
-                            <div class="type"><span>Strength</span>
-                            </div>
-                            <h3><a href="fitness-course-1.html">Strength Upper Body</a></h3>
-                            <div class="info_2 clearfix"><span class="price">39.90<sup>$</sup></span><span
-                                        class="users">450</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End box course_container -->
-                </div>
-                <div class="col-md-4" data-tag="Strength">
-                    <div class="course_container">
-                        <div class="ribbon"><span>Popular</span>
-                        </div>
-                        <figure>
-                            <a href="#0">
-                                <img src="{{asset("front_assets/img/course_5.jpg")}}" width="800" height="533"
-                                     class="img-responsive" alt="Image">
-                                <div class="short_info"><i class="icon-clock-1"></i>2 hr 56 min</div>
-                            </a>
-                        </figure>
-                        <div class="course_title">
-                            <div class="type"><span>Strength</span>
-                            </div>
-                            <h3><a href="#0">Fat Burning Butt and Thigh </a></h3>
-                            <div class="info_2 clearfix"><span class="price">39.90<sup>$</sup></span><span
-                                        class="users">450</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End box course_container -->
-                </div>
-                <div class="col-md-4" data-tag="Cardio">
-                    <div class="course_container">
-                        <div class="ribbon"><span>Popular</span>
-                        </div>
-                        <figure>
-                            <a href="fitness-course-1.html">
-                                <img src="{{asset("front_assets/img/course_6.jpg")}}" width="800" height="533"
-                                     class="img-responsive" alt="Image">
-                                <div class="short_info"><i class="icon-clock-1"></i>2 hr 56 min</div>
-                            </a>
-                        </figure>
-                        <div class="course_title">
-                            <div class="type"><span>Cardio</span>
-                            </div>
-                            <h3><a href="fitness-course-1.html">1000 Calorie Workout Video</a></h3>
-                            <div class="info_2 clearfix"><span class="price">39.90<sup>$</sup></span><span
-                                        class="users">450</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End box course_container -->
-                </div>
-                <div class="col-md-4" data-tag="Cardio">
-                    <div class="course_container">
-                        <figure>
-                            <a href="fitness-course-1.html">
-                                <img src="{{asset("front_assets/img/course_7.jpg")}}" width="800" height="533"
-                                     class="img-responsive" alt="Image">
-                                <div class="short_info"><i class="icon-clock-1"></i>2 hr 56 min</div>
-                            </a>
-                        </figure>
-                        <div class="course_title">
-                            <div class="type"><span>Cardio</span>
-                            </div>
-                            <h3><a href="fitness-course-1.html">Fat Burning Cardio</a></h3>
-                            <div class="info_2 clearfix"><span class="price">39.90<sup>$</sup></span><span
-                                        class="users">450</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End box course_container -->
-                </div>
-                <div class="col-md-4" data-tag="Pilates">
-                    <div class="course_container">
-                        <figure>
-                            <a href="fitness-course-1.html">
-                                <img src="{{asset("front_assets/img/course_8.jpg")}}" width="800" height="533"
-                                     class="img-responsive" alt="Image">
-                                <div class="short_info"><i class="icon-clock-1"></i>2 hr 56 min</div>
-                            </a>
-                        </figure>
-                        <div class="course_title">
-                            <div class="type"><span>Pilates</span>
-                            </div>
-                            <h3><a href="fitness-course-1.html">Lower Body Pilates</a></h3>
-                            <div class="info_2 clearfix"><span class="price">39.90<sup>$</sup></span><span
-                                        class="users">450</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End box course_container -->
-                </div>
-                <div class="col-md-4">
-                    <a href="explore-1.html" id="view_all"><span><i class="arrow_carrot-right_alt2"></i>View all courses</span></a>
-                </div>
+                @endforeach
+                {{$videos->links()}}
             </div>
             <!-- End row -->
         </div>

@@ -42,4 +42,7 @@ class User extends Authenticatable
     public function is_user(){
         return $this->user_type==='user';
     }
+    public function join_video(){
+        return $this->hasMany('App\VideoList', 'user_id', 'id');
+    }
 }

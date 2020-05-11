@@ -17,7 +17,7 @@
                                     <div class="media align-items-center widget-vdo-stat">
                                         <span class="icon text-info"><i class="fa fa-cloud-upload"></i></span>
                                         <div class="media-body">
-                                            <h2 class="text-info m-0">385</h2>
+                                            <h2 class="text-info m-0">{{$total_uploads}}</h2>
                                             <h5 class="text-muted f-s-14">Total Video Uploads</h5>
                                         </div>
                                     </div>
@@ -26,7 +26,7 @@
                                     <div class="media align-items-center widget-vdo-stat">
                                         <span class="icon text-dpink"><i class="fa fa-cloud-download"></i></span>
                                         <div class="media-body">
-                                            <h2 class="text-dpink m-0">215</h2>
+                                            <h2 class="text-dpink m-0">{{$total_downloads}}</h2>
                                             <h5 class="text-muted f-s-14">Total Video Downloads</h5>
                                         </div>
                                     </div>
@@ -35,7 +35,7 @@
                                     <div class="media align-items-center widget-vdo-stat">
                                         <span class="icon text-warning"><i class="fa fa-users"></i></span>
                                         <div class="media-body">
-                                            <h2 class="text-warning m-0">548</h2>
+                                            <h2 class="text-warning m-0">{{$total_users}}</h2>
                                             <h5 class="text-muted f-s-14">Total Registered Users</h5>
                                         </div>
                                     </div>
@@ -65,49 +65,35 @@
                                     </tr>
                                     </thead>
                                     <tbody>
+                                    @foreach($video_lists as $video_list)
                                     <tr>
                                         <td>
                                             <div class="media">
-                                                <img src="../../assets/images/avatar/1.png" class="mr-3" width="60"
+                                                <img src="{{asset('/cover_images/'.$video_list->video_cover)}}" class="mr-3" width="60"
                                                      height="60" alt="">
                                                 <div class="media-body">
-                                                    <h5 class="m-0">Nylon-Spandex Leggings</h5>
-                                                    <span class="text-muted">Yoga Training</span>
+                                                    <h5 class="m-0">{{$video_list->video_title}}</h5>
+                                                    <span class="text-muted"></span>
                                                 </div>
                                             </div>
                                         </td>
                                         <td>
                                             <span class="review-stars" style="color: #ffc107;">
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star-o" aria-hidden="true"></i>
-                                                <i class="fa fa-star-o" aria-hidden="true"></i>
+                                                @for($i=0;$i<5;++$i)
+                                                    <i class="fa fa-star{{ $video_list->ratings<=$i?'-o':'' }}" aria-hidden="true"></i>
+                                                @endfor
                                             </span>
                                         </td>
-                                        <td><span class="text-success">54</span>
+                                        <td><span class="text-success">{{$video_list->downloaded_number}}</span>
                                         </td>
-                                        <td>10/06/2018</td>
+                                        <td>{{$video_list->created_at}}</td>
                                     </tr>
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>
 
-                            <nav>
-                                <ul class="pagination pagination-rounded pagination-md justify-content-end">
-                                    <li class="page-item"><a class="page-link" href="javascript:void()"><i
-                                                    class="fa fa-angle-double-left"></i></a></li>
-                                    <li class="page-item"><a class="page-link" href="javascript:void()">1</a></li>
-                                    <li class="page-item"><a class="page-link" href="javascript:void()">2</a></li>
-                                    <li class="page-item active"><a class="page-link" href="javascript:void()">3</a>
-                                    </li>
-                                    <li class="page-item"><a class="page-link" href="javascript:void()">4</a></li>
-                                    <!-- <li class="page-item"><a class="page-link" href="javascript:void()">5</a></li> -->
-                                    <li class="page-item"><a class="page-link" href="javascript:void()"><i
-                                                    class="fa fa-angle-double-right"></i></a></li>
-                                </ul>
-                            </nav>
-
+                            {{$video_lists->links()}}
                         </div>
                     </div>
                 </div>
