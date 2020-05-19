@@ -5,20 +5,15 @@
     <section class="parallax_window_in" data-parallax="scroll" data-image-src="{{asset("front_assets/img/sub_header_general.jpg")}}" data-natural-width="1400" data-natural-height="470">
         <div id="sub_content_in">
             <h1>Contact us</h1>
-            <p>"Usu habeo equidem sanctus no ex melius labitur conceptam eos"</p>
         </div>
     </section>
     <!-- End section -->
     <!-- End SubHeader ============================================ -->
-
     <div class="container margin_60_35">
         <div class="row">
 
             <div class="col-md-12">
                 <h3>Contact us</h3>
-                <p>
-                    Mussum ipsum cacilds, vidis litro abertis.
-                </p>
                 <div>
                     <div id="message-contact"></div>
                     <form method="post" action="" id="contactform">

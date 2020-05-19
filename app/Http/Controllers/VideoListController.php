@@ -25,10 +25,11 @@ class VideoListController extends Controller
     public function index()
     {
         $user = Auth::user();
+
         $total_uploads = VideoList::select('id')->count();
         $total_downloads = VideoList::select('downloaded_number')->sum('downloaded_number');
         $total_users = User::select('id')->count();
-        $video_lists = VideoList::paginate(5);
+        $video_lists = VideoList::all();
 //        only user data
         $user_downloads = VideoList::where('user_id', $user->id)->count();
         $user_videos = VideoList::where('user_id', $user->id)->get();
@@ -44,6 +45,11 @@ class VideoListController extends Controller
         return view('admin.add');
     }
     public function addVideo(Request $request){
+        $request->input('video_name');
+        $request->input('video_description');
+        $request->input('video_category');
+        $request->file('video_file');
+        dd("ddsd");
         if ($request->hasFile('video_cover')){
             $cover_image = $request->file('video_cover')->getClientOriginalName();
             $request->file('video_cover')->move(public_path('cover_images'), $cover_image);
@@ -62,10 +68,18 @@ class VideoListController extends Controller
         return back();
     }
     public function editShow(){
+        $user = Auth::user();
+        if (!$user->is_admin()){
+            return back();
+        }
         $video_data = VideoList::paginate(5);
         return view('admin.edit', compact('video_data'));
     }
     Public function editDelete($id){
+        $user = Auth::user();
+        if (!$user->is_admin()){
+            return back();
+        }
         $video = VideoList::where('id',$id)->get();
         $video_path = public_path().'/uploaded_video/'.$video[0]->video_url;
         $video_cover = public_path().'/cover_images/'.$video[0]->video_cover;

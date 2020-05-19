@@ -5,12 +5,14 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Video Admin Dashboard </title>
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <title>Zoomers Dashboard </title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="{{asset("assets/images/favicon.png")}}">
     <!-- Custom Stylesheet -->
     <link href="{{asset("assets/css/style.css")}}" rel="stylesheet">
-
+    <link href="{{asset("assets/plugins/datatables/css/jquery.dataTables.min.css")}}" rel="stylesheet">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 </head>
 
 <body>
@@ -41,13 +43,12 @@
         Nav header start
     ***********************************-->
     <div class="nav-header">
-        <div class="brand-logo"><a href="/"><b><img src="{{asset("assets/images/logo.png")}}" alt=""> </b><span class="brand-title"><img src="{{asset("assets/images/logo-text.png")}}" alt=""></span></a>
+        <div class="brand-logo">
+            <a href="/">
+            <b><img src="{{asset("assets/images/logo.png")}}" style="height: 70px; width: auto;" alt=""></b>
+            </a>
         </div>
-        <div class="nav-control">
-            <div class="hamburger"><span class="line"></span>  <span class="line"></span>  <span class="line"></span>
-            </div>
         </div>
-    </div>
     <!--**********************************
         Nav header end
     ***********************************-->
@@ -78,67 +79,6 @@
             </div>
             <div class="header-right">
                 <ul>
-                    <li class="icons">
-                        <a href="javascript:void(0)">
-                            <i class="mdi mdi-comment"></i>
-                            <div class="pulse-css"></div>
-                        </a>
-                        <div class="drop-down animated bounceInDown">
-                            <div class="dropdown-content-heading">
-                                <span class="pull-left">Messages</span>
-                                <a href="javascript:void()" class="pull-right text-white">View All</a>
-                                <div class="clearfix"></div>
-                            </div>
-                            <div class="dropdown-content-body">
-                                <ul>
-                                    <li class="notification-unread">
-                                        <a href="javascript:void()">
-                                            <img class="pull-left mr-3 avatar-img" src="{{asset("assets/images/avatar/1.jpg")}}" alt="">
-                                            <div class="notification-content">
-                                                <div class="notification-heading">Druid Wensleydale</div>
-                                                <div class="notification-text">A wonderful serenit has take possession</div><small class="notification-timestamp">08 Hours ago</small>
-                                            </div>
-                                        </a><span class="notify-close"><i class="ti-close"></i></span>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:void()">
-                                            <img class="pull-left mr-3 avatar-img" src="{{asset("assets/images/avatar/4.jpg")}}" alt="">
-                                            <div class="notification-content">
-                                                <div class="notification-heading">Bodrum Salvador</div>
-                                                <div class="notification-text">A wonderful serenit has take possession</div><small class="notification-timestamp">08 Hours ago</small>
-                                            </div>
-                                        </a><span class="notify-close"><i class="ti-close"></i></span>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="icons">
-                        <a href="javascript:void(0)">
-                            <i class="mdi mdi-bell"></i>
-                            <div class="pulse-css"></div>
-                        </a>
-                        <div class="drop-down animated bounceInDown dropdown-notfication">
-                            <div class="dropdown-content-body">
-                                <ul>
-                                    <li>
-                                        <a href="javascript:void()">
-                                            <span class="mr-3 avatar-icon bg-success-lighten-2"><i class="fa fa-check"></i></span>
-                                            <div class="notification-content">
-                                                <div class="notification-heading">Druid Wensleydale</div>
-                                                <span class="notification-text">A wonderful serenit of my entire soul.</span>
-                                                <small class="notification-timestamp">20 May 2018, 15:32</small>
-                                            </div>
-                                        </a>
-                                        <span class="notify-close"><i class="ti-close"></i>
-                                                </span>
-                                    </li>
-                                    <li class="text-left"><a href="javascript:void()" class="more-link">Show All Notifications</a>  <span class="pull-right"><i class="fa fa-angle-right"></i></span>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </li>
                     @auth
                     <li class="icons">
                         <a href="javascript:void(0)" class="log-user">
@@ -147,16 +87,6 @@
                         <div class="drop-down dropdown-profile animated bounceInDown">
                             <div class="dropdown-content-body">
                                 <ul>
-                                    <li><a href="javascript:void()"><i class="icon-user"></i> <span>My Profile</span></a>
-                                    </li>
-                                    <li><a href="javascript:void()"><i class="icon-wallet"></i> <span>My Wallet</span></a>
-                                    </li>
-                                    <li><a href="javascript:void()"><i class="icon-envelope"></i> <span>Inbox</span></a>
-                                    </li>
-                                    <li><a href="javascript:void()"><i class="fa fa-cog"></i> <span>Setting</span></a>
-                                    </li>
-                                    <li><a href="javascript:void()"><i class="icon-lock"></i> <span>Lock Screen</span></a>
-                                    </li>
                                     <li>
                                         <a href="{{route('logout')}}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -193,11 +123,7 @@
                         <i class="mdi mdi-view-dashboard"></i><span class="nav-text"> Video Dashboard</span>
                     </a>
                 </li>
-                <li class="mega-menu mega-menu-sm">
-                    <a class="has-arrow" href="{{route('add-video')}}" aria-expanded="false">
-                        <i class="mdi mdi-page-layout-body"></i><span class="nav-text">Add Videos</span>
-                    </a>
-                </li>
+
                 <li>
                     <a class="has-arrow" href="{{route("edit-delete")}}" aria-expanded="false">
                         <i class="mdi mdi-email-outline"></i> <span class="nav-text">Edit/Delete Videos</span></a>
@@ -214,6 +140,11 @@
                         <i class="mdi mdi-chart-bar"></i> <span class="nav-text">View Downloaded Videos</span></a>
                 </li>
                 @endif
+                <li class="mega-menu mega-menu-sm">
+                    <a class="has-arrow" href="{{route('add-video')}}" aria-expanded="false">
+                        <i class="mdi mdi-page-layout-body"></i><span class="nav-text">Add Videos</span>
+                    </a>
+                </li>
                 <li><a class="has-arrow" href="{{route('change-password')}}" aria-expanded="false">
                         <i class="mdi mdi-ticket"></i><span class="nav-text">Change password</span></a>
                 </li>
@@ -253,6 +184,9 @@
 <!-- <script src="../../assets/plugins/morris/morris.min.js"></script> -->
 <script src="{{asset("assets/plugins/circle-progress/circle-progress.min.js")}}"></script>
 <script src="{{asset("assets/plugins/chart.js/Chart.bundle.min.js")}}"></script>
+<script src="{{asset("assets/plugins/datatables/js/jquery.dataTables.min.js")}}"></script>
+<script src="{{asset("assets/js/plugins-init/datatables.init.js")}}"></script>
 <!-- <script src="../js/dashboard/dashboard-19.js"></script> -->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </body>
 </html>

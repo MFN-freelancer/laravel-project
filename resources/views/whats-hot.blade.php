@@ -2,8 +2,7 @@
 @section("content")
     <section class="parallax_window_in" data-parallax="scroll" data-image-src="{{asset("front_assets/img/sub_header_general.jpg")}}" data-natural-width="1400" data-natural-height="470">
         <div id="sub_content_in">
-            <h1>The top 10 most downloaded videos</h1>
-            <p>"Usu habeo equidem sanctus no ex melius labitur conceptam eos"</p>
+            <h1>Most downloaded backgrounds</h1>
         </div>
     </section>
     <!-- End section -->
@@ -20,12 +19,17 @@
                                 <div class="ribbon top"><span>Top 10 Video</span></div>
                                 <figure>
                                     @auth
-                                        <a href="{{URL::to('/uploaded_video/'.$hot_video->video_url)}}" download>
+                                        {{--<a href="{{URL::to('/uploaded_video/'.$hot_video->video_url)}}" download>--}}
+                                        <a href="video-view/{{$hot_video->id}}">
+                                        @else
+                                            <a href="#" data-toggle="modal" data-target="#login" class="hidden-xs">
                                     @endauth
                                         <img src="{{asset("cover_images/".$hot_video->video_cover)}}" width="800" height="533" class="img-responsive" alt="Image">
                                         <div class="short_info"><i class="icon-clock-1"></i></div>
                                     @auth
                                         </a>
+                                        @else
+                                            </a>
                                     @endauth
                                 </figure>
                                 <div class="course_title">
@@ -33,7 +37,9 @@
                                         <span>{{$hot_video->category}}</span>
                                     </div>
                                     @auth
-                                        <h3><a href="{{URL::to('/uploaded_video/'.$hot_video->video_url)}}" download>{{$hot_video->video_title}} </a></h3>
+                                        <h3>
+                                                <a href="video-view/{{$hot_video->id}}">{{$hot_video->video_title}} </a>
+                                        </h3>
                                     @endauth
                                     <div class="info_2 clearfix">
                                         <span class="review-stars" style="color: #ffc107;">

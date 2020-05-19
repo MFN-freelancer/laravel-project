@@ -9,28 +9,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="video free download">
     <meta name="author" content="Ansonika">
-    <title>video front</title>
+    <title>Zoomers</title>
 
     <!-- Favicons-->
-    <link rel="shortcut icon" href="{{asset("front_assets/img/favicon.ico")}}" type="image/x-icon">
-    <link rel="apple-touch-icon" type="image/x-icon"
-          href="{{asset("front_assets/img/apple-touch-icon-57x57-precomposed.png")}}">
-    <link rel="apple-touch-icon" type="image/x-icon" sizes="72x72"
-          href="{{asset("front_assets/img/apple-touch-icon-72x72-precomposed.png")}}">
-    <link rel="apple-touch-icon" type="image/x-icon" sizes="114x114"
-          href="{{asset("front_assets/img/apple-touch-icon-114x114-precomposed.png")}}">
-    <link rel="apple-touch-icon" type="image/x-icon" sizes="144x144"
-          href="{{asset("front_assets/img/apple-touch-icon-144x144-precomposed.png")}}">
-
+    <link rel="shortcut icon" href="{{asset("front_assets/img/favicon.png")}}" type="image/x-icon">
     <!-- BASE CSS -->
     <link href="{{asset("front_assets/css/base.css")}}" rel="stylesheet">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://vjs.zencdn.net/7.7.6/video-js.css" rel="stylesheet" />
+
+    <!-- If you'd like to support IE8 (for Video.js versions prior to v7) -->
+    <script src="https://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script>
     <!-- Modernizr -->
     <script src="{{asset("front_assets/js/modernizr.js")}}"></script>
 
     <!--[if lt IE 9]>
-    <script src="front_assets/js/html5shiv.min.js"></script>
-    <script src="front_assets/js/respond.min.js"></script>
+    <script src="{{asset('front_assets/js/html5shiv.min.js')}}"></script>
+    <script src="{{asset('front_assets/js/respond.min.js')}}"></script>
     <![endif]-->
 
 </head>
@@ -82,9 +77,9 @@
                     <a href="#" class="open_close" id="close_in"><i class="icon_close"></i></a>
                     <ul>
                         <li><a href="/">Home</a></li>
-                        <li><a href="whats-new">What’s new</a></li>
-                        <li><a href="whats-hot">What’s hot</a></li>
-                        <li><a href="contact-us">Contact us</a></li>
+                        <li><a href="/whats-new">What’s new</a></li>
+                        <li><a href="/whats-hot">What’s hot</a></li>
+                        <li><a href="/contact-us">Contact us</a></li>
                         @if(Auth::check())
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
@@ -121,26 +116,14 @@
 <footer>
     <div class="container">
         <div class="row ">
-            <div class="col-md-3 col-sm-12">
+            <div class="col-md-3 col-sm-6">
                 <p>
-                    <img src="{{asset("front_assets/img/logo.png")}}" width="95" height="27" alt="Lovefit"
+                    <img src="{{asset("front_assets/img/logo.png")}}" style="height: 95px; width: auto;" alt="ZOOMERS'"
                          data-retina="true">
                 </p>
-                <div id="social">
-                    <ul>
-                        <li><a href="#"><i class="icon-facebook"></i></a>
-                        </li>
-                        <li><a href="#"><i class="icon-twitter"></i></a>
-                        </li>
-                        <li><a href="#"><i class="icon-google"></i></a>
-                        </li>
-                        <li><a href="#"><i class="icon-linkedin"></i></a>
-                        </li>
-                    </ul>
-                </div>
+
             </div>
-            <div class="col-md-3 col-sm-6">
-                <h4>About</h4>
+            <div class="col-md-9 col-sm-6">
                 <ul>
                     <li><a href="#">Home</a>
                     </li>
@@ -154,25 +137,6 @@
                     </li>
                 </ul>
             </div>
-            <div class="col-md-3 col-sm-6">
-                <h4>Discover</h4>
-                <ul>
-                    <li><a href="#">What’s hot</a>
-                    </li>
-                    <li><a href="#">Terms and condition</a>
-                    </li>
-                    <li><a href="#">Privacy</a>
-                    </li>
-                    <li><a href="#">Cookie Policy</a>
-                    </li>
-                    <li><a href="#">Faq</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="col-md-3 hidden-sm hidden-xs">
-                <img src="{{asset("front_assets/img/footer_img.png")}}" width="257" height="302" alt="Image"
-                     class="footer_pic">
-            </div>
         </div>
         <!-- End row -->
     </div>
@@ -181,7 +145,7 @@
 <!-- End footer -->
 <div id="copy">
     <div class="container">
-        © LoveFit 2020 - All rights reserved.
+        © Zoomersbackgrounds 2020 - All rights reserved.
     </div>
 </div>
 <!-- End copy -->
@@ -224,7 +188,12 @@
                     </div>
                 </div>
                 <button type="submit" class="btn btn-submit">Login</button>
+                {{--<div class="form-group row">--}}
+                    <a href="#" class="btn btn-submit" data-toggle="modal" data-target="#register" class="hidden-xs">Register now</a>
+                {{--</div>--}}
+
             </form>
+
         </div>
     </div>
 </div>
@@ -298,7 +267,7 @@
         autoPlayVideo: true
     });
 </script>
-
+<script src="https://vjs.zencdn.net/7.7.6/video.js"></script>
 </body>
 
 </html>

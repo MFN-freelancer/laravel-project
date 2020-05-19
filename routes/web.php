@@ -20,7 +20,7 @@ Auth::routes();
 Route::get('/', 'FrontController@index');
 Route::get('whats-new', 'FrontController@whatNew');
 Route::get('whats-hot', 'FrontController@whatHot');
-
+Route::get('video-view/{id}', 'FrontController@player');
 Route::get('contact-us', function (){
     return view('contact-us');
 });
@@ -42,4 +42,12 @@ Route::group(['prefix'=>'admin'], function(){
     })->name('change-password');
     Route::get('change-password/{id}', 'HomeController@updateUser');
     Route::get('/downloaded', 'VideoListController@index')->name('downloaded-video');
+});
+Route::get('/config-cache', function() {
+
+    $exitCode = Artisan::call('cache:clear');
+    $exitCode = Artisan::call('route:clear');
+    $exitCode = Artisan::call('view:clear');
+    $exitCode = Artisan::call('config:cache');
+    return '<h1>Clear Config cleared</h1>';
 });

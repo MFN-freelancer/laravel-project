@@ -407,7 +407,7 @@ a.btn_1.white:hover,
 header {
 	padding: 5px 10px;
 	width: 100%;
-	position: fixed;
+	position: absolute;
 	top: 0;
 	left: 0;
 	z-index: 9999;
@@ -447,7 +447,7 @@ header.sticky #logo .logo_sticky {
 }
 
 #logo img {
-	height: 27px;
+	height: 95px;
 	width: auto;
 	margin: 12px 0 0 0;
 }
@@ -472,7 +472,7 @@ ul#access_top li a {
 	-webkit-border-radius: 15px;
 	-moz-border-radius: 15px;
 	border-radius: 15px;
-	font-size: 12px;
+	font-size: 22px;
 	font-weight: 500;
 }
 
@@ -520,16 +520,18 @@ footer h4 {
 
 footer ul {
 	list-style: none;
-	padding: 0 0 20px 0;
+	padding: 40px 0 20px 0;
+	display: flex;
+    flex-flow: wrap;
 }
 
 footer a {
 	color: #fff;
+	padding-left: 58px;
 }
 
 footer a:hover {
-	color: #fff;
-	padding-left: 5px;
+	color: #fea;
 }
 
 .footer_pic {
@@ -1044,7 +1046,7 @@ a#view_all span i {
 }
 
 ul#course_info {
-	background-color: #4088DA;
+	background-color: #18181d;
 	margin: 0;
 	padding: 10px;
 	list-style: none;

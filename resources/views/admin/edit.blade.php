@@ -57,7 +57,7 @@
                                                 {{--<a href="javascript:void()" class="mr-4" data-toggle="tooltip"--}}
                                                   {{--data-placement="top" title="" data-original-title="Edit">--}}
                                                     {{--<i class="fa fa-pencil color-muted"></i> </a>--}}
-                                                <a href="/admin/edit-delete/{{$video->id}}" data-toggle="tooltip" data-placement="top" title="" data-original-title="Close">
+                                                <a href="/admin/edit-delete/{{$video->id}}" class="delete-confirm" data-placement="top" title="" data-original-title="Close">
                                                     <i class="fa fa-close color-danger"></i></a>
                                             </span>
                                         </td>
@@ -73,4 +73,20 @@
             </div>
         </div>
     </div>
+    <script>
+        $('.delete-confirm').on('click', function (event) {
+            event.preventDefault();
+            const url = $(this).attr('href');
+            swal({
+                title: 'Are you sure?',
+                text: 'This video will be permanently deleted!',
+                icon: 'warning',
+                buttons: ["Cancel", "Yes!"],
+            }).then(function(value) {
+                if (value) {
+                    window.location.href = url;
+                }
+            });
+        });
+    </script>
 @endsection

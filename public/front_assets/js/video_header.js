@@ -29,7 +29,7 @@ var HeaderVideo = (function ($, document) {
         videoDetails = {
             id: settings.header.attr('data-video-src'),
             teaser: settings.header.attr('data-teaser-source'),
-            provider: settings.header.attr('data-provider').toLowerCase(),
+            provider: settings.header.attr('data-provider'),
             videoHeight: settings.header.attr('data-video-height'),
             videoWidth: settings.header.attr('data-video-width')
         }

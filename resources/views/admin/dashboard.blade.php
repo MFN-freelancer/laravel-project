@@ -48,52 +48,58 @@
             </div>
 
             <div class="row">
-                <div class="col-lg-12">
-                    <div class="card transparent-card video-session-table">
-                        <div class="card-body p-0">
-                            <div class="section-header d-block align-items-center justify-content-between mb-3">
-                                <h4 class="card-title mb-4">Newly added videos</h4>
-                            </div>
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title mb-4">Added Videos</h4>
                             <div class="table-responsive">
-                                <table class="table table-padded table-responsive-fix-big">
-                                    <thead>
-                                    <tr>
-                                        <th>Video Title</th>
-                                        <th>ratings</th>
-                                        <th>downloaded numbers</th>
-                                        <th>Created Date</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    @foreach($video_lists as $video_list)
-                                    <tr>
-                                        <td>
-                                            <div class="media">
-                                                <img src="{{asset('/cover_images/'.$video_list->video_cover)}}" class="mr-3" width="60"
-                                                     height="60" alt="">
-                                                <div class="media-body">
-                                                    <h5 class="m-0">{{$video_list->video_title}}</h5>
-                                                    <span class="text-muted"></span>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
+                                <div class="table-responsive">
+                                    <table id="example" class="display" style="min-width: 845px">
+                                        <thead>
+                                        <tr>
+                                            <th>Video Title</th>
+                                            <th>ratings</th>
+                                            <th>downloaded numbers</th>
+                                            <th>Created Date</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        @foreach($video_lists as $video_list)
+                                            <tr>
+                                                <td>
+                                                    <div class="media">
+                                                        <img src="{{asset('/cover_images/'.$video_list->video_cover)}}" class="mr-3" width="60"
+                                                             height="60" alt="">
+                                                        <div class="media-body">
+                                                            <h5 class="m-0">{{$video_list->video_title}}</h5>
+                                                            <span class="text-muted"></span>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
                                             <span class="review-stars" style="color: #ffc107;">
                                                 @for($i=0;$i<5;++$i)
                                                     <i class="fa fa-star{{ $video_list->ratings<=$i?'-o':'' }}" aria-hidden="true"></i>
                                                 @endfor
                                             </span>
-                                        </td>
-                                        <td><span class="text-success">{{$video_list->downloaded_number}}</span>
-                                        </td>
-                                        <td>{{$video_list->created_at}}</td>
-                                    </tr>
-                                    @endforeach
-                                    </tbody>
-                                </table>
+                                                </td>
+                                                <td><span class="text-success">{{$video_list->downloaded_number}}</span>
+                                                </td>
+                                                <td>{{$video_list->created_at}}</td>
+                                            </tr>
+                                        @endforeach
+                                        </tbody>
+                                        <tfoot>
+                                        <tr>
+                                            <th>Video Title</th>
+                                            <th>ratings</th>
+                                            <th>downloaded numbers</th>
+                                            <th>Created Date</th>
+                                        </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
                             </div>
-
-                            {{$video_lists->links()}}
                         </div>
                     </div>
                 </div>
